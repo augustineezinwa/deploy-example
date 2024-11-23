@@ -6,7 +6,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: "/dist",
+  basePath: "",
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;
