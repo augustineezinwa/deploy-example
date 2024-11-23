@@ -9,11 +9,11 @@ on:
   ## run manually
   workflow_dispatch:
 
-  ## setup permissions
-  permissions:
-    contents: read
-    pages: write
-    id-token: write
+## setup permissions
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
