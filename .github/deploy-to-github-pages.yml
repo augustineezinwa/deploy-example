@@ -6,12 +6,21 @@ on:
     branches:
       - main
 
+  ## run manually
+  workflow_dispatch:
+
+  ## setup permissions
+  permissions:
+    contents: read
+    pages: write
+    id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
@@ -21,9 +30,6 @@ jobs:
 
       ### build the app
       - run: npm run build
-
-      ### export the app
-      - run: npm run export
 
       ### deploy to github pages
       - name: Deploy to GitHub Pages
