@@ -1,0 +1,36 @@
+### I want to deploy this as a static site to github pages, write me the github actions workflow to do this
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+
+      ### install dependencies
+      - run: npm ci
+
+      ### build the app
+      - run: npm run build
+
+      ### export the app
+      - run: npm run export
+
+      ### deploy to github pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # The directory to deploy to GitHub Pages
+          publish_branch: gh-pages # The branch to deploy to GitHub Pages
+          user_name: ${{ secrets.GH_USER_NAME }} # The username to use for the commit
+          user_email: ${{ secrets.GH_USER_EMAIL }} # The email to use for the commit
