@@ -9,12 +9,6 @@ on:
   ## run manually
   workflow_dispatch:
 
-## setup permissions
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,6 +29,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: "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"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist # The directory to deploy to GitHub Pages
 
